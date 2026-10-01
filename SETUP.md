@@ -1,4 +1,4 @@
-# handoff — Setup
+# handoff: Setup
 
 ## What it needs
 
@@ -11,11 +11,11 @@ Mode 1 (same-project continuity) and mode 2 (portable) have different dependenci
 | `~/.claude/plans/handoffs/` directory | Durable storage for same-project handoff prompts | Created on first use; safe to create manually | Mode 1 |
 | `~/.claude/plans/handoffs/portable/` directory | Durable storage for portable handoff prompts (the paste-able block is the actual delivery mechanism; this is just your own local record) | Created on first use; safe to create manually | Mode 2 |
 
-No environment variables, no Python runtime, no external APIs — the pytest suite in `tests/` only validates repository hygiene and is not needed to run the skill.
+No environment variables, no Python runtime, no external APIs; the pytest suite in `tests/` only validates repository hygiene and is not needed to run the skill.
 
 ## For another user
 
-1. Install ai-memory (server + hooks) per its own docs — this skill only *calls* it.
+1. Install ai-memory (server + hooks) per its own docs; this skill only *calls* it.
 2. Copy `~/.claude/skills/handoff/` into your `~/.claude/skills/`.
 3. Done. Without ai-memory the skill degrades gracefully: it still writes the durable file and prints the paste-able block; only the auto-inject leg is lost.
 

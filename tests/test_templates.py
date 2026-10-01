@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -39,3 +40,15 @@ def test_generic_ticket_placeholder():
     template = (REFERENCES_DIR / "template.md").read_text(encoding="utf-8")
     assert "TICKET-123" in skill_md
     assert "TICKET-123" in template
+
+
+def test_rendered_text_has_no_em_dash():
+    for path in (REFERENCES_DIR / "template.md", REFERENCES_DIR / "template-portable.md", REPO_ROOT / "SKILL.md"):
+        assert "\u2014" not in path.read_text(encoding="utf-8"), path.name
+
+
+def test_description_fits_listing_budget():
+    text = (REPO_ROOT / "SKILL.md").read_text(encoding="utf-8")
+    description = re.search(r"^description:\s*(.+)$", text, re.MULTILINE).group(1).strip().strip("'\"")
+    assert len(description) <= 300, len(description)
+    assert "ai-memory-handoff" in description

@@ -15,7 +15,7 @@ Context windows end. The next session normally restarts from zero: re-reading th
 
 ## What makes it non-trivial
 
-Every volatile fact — branch, commit hash, PR number, plan path — is re-verified with a command before it is written, never taken from conversational memory. A sanitization pass redacts anything matching secret shapes (`sk-`, `ghp_`, `AKIA`, `Bearer …`, credentials embedded in connection strings) before the content touches disk or the terminal.
+Every volatile fact (branch, commit hash, PR number, plan path) is re-verified with a command before it is written, never taken from conversational memory. A sanitization pass redacts anything matching secret shapes (`sk-`, `ghp_`, `AKIA`, `Bearer …`, credentials embedded in connection strings) before the content touches disk or the terminal.
 
 ## Install
 
@@ -28,9 +28,9 @@ Restart or start a Claude Code session, then confirm with `/handoff`.
 
 ## Usage
 
-Trigger with `/handoff`, or with natural language in either English or Portuguese — the skill's `description:` frontmatter carries trigger phrases in both languages, since it was built for daily bilingual use:
+Trigger with `/handoff`, or with natural language in either English or Portuguese; the skill's `description:` frontmatter carries trigger phrases in both languages, since it was built for daily bilingual use:
 
-- "prompt para próxima sessão", "gera handoff", "salva o contexto pra próxima sessão" (mode 1)
+- "prompt para próxima sessão", "gera handoff", "prompt para próxima fase" (mode 1)
 - "manda esse contexto pra outro repo/agente", "handoff portátil", "passa isso pra um colega" (mode 2)
 - Accepting an offered handoff after finishing a phase of a multi-phase plan also triggers mode 1.
 
@@ -39,7 +39,7 @@ Trigger with `/handoff`, or with natural language in either English or Portugues
 A rendered mode-2 portable handoff, with fictional data:
 
 ```
-[Portable handoff — generated on 2026-08-25. This block is self-contained; it assumes no access to this project, this repository, or the local ai-memory instance.]
+[Portable handoff, generated on 2026-08-25. This block is self-contained; it assumes no access to this project, this repository, or the local ai-memory instance.]
 
 TASK: Add a token-bucket rate limiter to the public API gateway, keyed by API key, with a 429 response and a Retry-After header.
 
@@ -49,12 +49,12 @@ CURRENT STATE:
 - Rate limiter core implemented and unit-tested on branch feature/ticket-123-rate-limiter.
 - Wired into the gateway middleware chain; integration test pending.
 
-REFERENCES (paths/URLs, not copies — only include what the recipient can actually open):
+REFERENCES (paths/URLs, not copies; only include what the recipient can actually open):
 - https://github.com/example-org/api-gateway/pull/42
 - https://github.com/example-org/api-gateway/blob/a1b2c3d/src/middleware/rate_limit.py
 
 DECISIONS / CONSTRAINTS:
-- Bucket state lives in-memory per instance, not in a shared store — deliberate for this phase, do not swap in Redis without a new decision.
+- Bucket state lives in-memory per instance, not in a shared store; deliberate for this phase, do not swap in Redis without a new decision.
 
 NEXT STEP:
 - Add the integration test exercising a burst above the bucket size.
@@ -77,4 +77,4 @@ Mode 2 has zero coupling to ai-memory. Mode 1 degrades gracefully when the MCP s
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT, see [LICENSE](LICENSE).
